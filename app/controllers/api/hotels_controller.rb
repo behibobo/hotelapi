@@ -47,7 +47,7 @@ class Api::HotelsController < ApplicationController
       @hotel.hotel_facilities.destroy_all()
 
       params[:facilities].each do |facility|
-        HotelFacility.create(hotel: @hotel, facility_id: facility[:id])
+        HotelFacility.create!(hotel: @hotel, facility_id: facility)
       end
 
       render json: @hotel
