@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  from_date: 2020-09-18
+  to_date: 2020-09-18
+  hotel: one
+  status: 1
+
+two:
+  from_date: 2020-09-18
+  to_date: 2020-09-18
+  hotel: two
+  status: 1
