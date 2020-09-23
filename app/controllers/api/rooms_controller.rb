@@ -5,7 +5,7 @@ class Api::RoomsController < ApplicationController
   def index
     @rooms = Room.all
 
-    render json: @rooms
+    paginate @rooms, per_page: (params[:per_page]) ? params[:per_page] : 15
   end
 
   # GET /rooms/1
@@ -18,7 +18,7 @@ class Api::RoomsController < ApplicationController
     @room = Room.new(room_params)
 
     if @room.save
-      render json: @room, status: :created, location: @room
+      render json: @room, status: :created
     else
       render json: @room.errors, status: :unprocessable_entity
     end

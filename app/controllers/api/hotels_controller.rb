@@ -5,10 +5,11 @@ class Api::HotelsController < ApplicationController
   def index
     if current_user.role == "admin"
       @hotels = Hotel.all
+      paginate @hotels, per_page: (params[:per_page]) ? params[:per_page] : 15
     else
-      @hotels = Hotel.where(user: current_user)
+      @hotel = Hotel.where(user: current_user).first
+      render json: @hotel
     end
-    render json: @hotels
   end
 
   # GET /hotels/1

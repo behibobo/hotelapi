@@ -4,8 +4,7 @@ class Api::FacilitiesController < ApplicationController
   # GET /facilities
   def index
     @facilities = Facility.all
-
-    render json: @facilities
+    paginate @facilities, per_page: (params[:per_page]) ? params[:per_page] : 15
   end
 
   # GET /facilities/1
