@@ -8,7 +8,7 @@ class Api::HotelsController < ApplicationController
     else
       @hotels = Hotel.where(user: current_user)
     end
-    render json: @hotels
+    paginate @hotels, per_page: (params[:per_page]) ? params[:per_page] : 15
   end
 
   # GET /hotels/1
