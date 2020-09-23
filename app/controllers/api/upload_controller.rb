@@ -1,12 +1,16 @@
 class Api::UploadController < ApplicationController
+  
   def create
-    
     if (params[:type] == "hotel")
       @resource = Hotel.find(params[:id])
     end
 
-    @image = @resource.images.build(name: params[:file])
-    @image.save
-		render json: {data: @image.name }
+    params[:files].each do |file|
+      @image = @resource.images.build(name: file)
+      @image.save
+    end
+    
+		render json: {data: @image.images }
   end
+
 end
