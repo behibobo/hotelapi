@@ -3,8 +3,11 @@ class Api::UsersController < ApplicationController
 
   # REGISTER
   def index
+    
     @users = User.all
-    render json: @users
+    @users = @users.starts_with('username', params[:username]) if params[:username]
+
+    paginate @users, per_page: (params[:per_page]) ? params[:per_page] : 15
   end
   
   def create
