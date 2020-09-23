@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :contracts
     resources :hotels
     resources :facilities
+    resources :rooms
     resources :users, only: [:index, :create]
     post "/login", to: "users#login"
     get "/auto_login", to: "users#auto_login"

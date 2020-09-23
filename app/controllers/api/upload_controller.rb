@@ -3,6 +3,8 @@ class Api::UploadController < ApplicationController
   def create
     if (params[:type] == "hotel")
       @resource = Hotel.find(params[:id])
+    else
+      @resource = Room.find(params[:id])
     end
 
     params[:files].each do |file|
