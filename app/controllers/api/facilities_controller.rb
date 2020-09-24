@@ -36,6 +36,14 @@ class Api::FacilitiesController < ApplicationController
   def destroy
     @facility.destroy
   end
+  
+
+  def all
+    @facilities = Facility.all
+    @facilities = @facilities.starts_with('name', params[:name]) if params[:name]
+
+    render json: @facilities
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

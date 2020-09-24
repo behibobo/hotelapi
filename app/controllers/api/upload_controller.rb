@@ -12,7 +12,7 @@ class Api::UploadController < ApplicationController
       @image.save
     end
     
-		render json: {data: @image.images }
+		render json: {data: @resource.images }
   end
 
 end
