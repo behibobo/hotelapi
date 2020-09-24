@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get "/province", to: "cities#province"
     get "/city", to: "cities#city"
     post "/upload", to: "upload#create"
+    get '/all_facilities', to: "facilities#all"
   end
   
 end
