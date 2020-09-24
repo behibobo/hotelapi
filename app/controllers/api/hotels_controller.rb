@@ -27,10 +27,12 @@ class Api::HotelsController < ApplicationController
     @hotel = Hotel.new(hotel_params)
 
     if @hotel.save
-      params[:facilities].each do |facility|
-        HotelFacility.create!(hotel: @hotel, facility_id: facility)
+      
+      if params[:facilities]
+        params[:facilities].each do |facility|
+          HotelFacility.create!(hotel: @hotel, facility_id: facility)
+        end
       end
-
       render json: @hotel, status: :created
     else
       render json: @hotel.errors, status: :unprocessable_entity
@@ -47,8 +49,10 @@ class Api::HotelsController < ApplicationController
     if @hotel.update(hotel_params)
       @hotel.hotel_facilities.destroy_all()
 
-      params[:facilities].each do |facility|
-        HotelFacility.create!(hotel: @hotel, facility_id: facility)
+      if params[:facilities]
+        params[:facilities].each do |facility|
+          HotelFacility.create!(hotel: @hotel, facility_id: facility)
+        end
       end
 
       render json: @hotel
