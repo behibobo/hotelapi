@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     get "/province", to: "cities#province"
     get "/city", to: "cities#city"
     post "/upload", to: "upload#create"
+    delete "/upload/:id", to: "upload#delete"
     get '/all_facilities', to: "facilities#all"
+    get '/dashboard', to: "dashboard#index"
   end
   
 end

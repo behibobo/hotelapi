@@ -15,4 +15,10 @@ class Api::UploadController < ApplicationController
 		render json: {data: @resource.images }
   end
 
+
+  def delete
+    image = Image.find(params[:id])
+    image.destroy
+  end
+
 end

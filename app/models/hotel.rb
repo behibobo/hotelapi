@@ -6,6 +6,7 @@ class Hotel < ApplicationRecord
 
   has_many :hotel_facilities
   has_many :facilities, through: :hotel_facilities
+  has_many :rooms
   
   def current_contract
     self.contracts.order(created_at: :desc).first
