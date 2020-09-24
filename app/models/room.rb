@@ -3,4 +3,5 @@ class Room < ApplicationRecord
   has_many :images, as: :imageable
 
   enum status: [ :available, :booked ]
+  enum room_type: [ :single, :double, :suite ]
 end

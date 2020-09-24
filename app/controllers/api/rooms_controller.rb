@@ -4,7 +4,7 @@ class Api::RoomsController < ApplicationController
   # GET /rooms
   def index
     @rooms = Room.all
-
+    @rooms = @rooms.where(hotel_id: params[:hotel_id]) if params[:hotel_id]
     paginate @rooms, per_page: (params[:per_page]) ? params[:per_page] : 15
   end
 
