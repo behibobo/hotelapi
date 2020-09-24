@@ -1,5 +1,5 @@
 class HotelSerializer < ActiveModel::Serializer
-  attributes :id, :name, :address, :lat, :lng, :rank, :images, :facilities, :booked_rooms, :available_rooms
+  attributes :id, :name, :address, :lat, :lng, :rank, :images, :facilities, :hotel_facilities, :booked_rooms, :available_rooms
   
   has_one :city
   has_one :user
@@ -18,6 +18,10 @@ class HotelSerializer < ActiveModel::Serializer
 
   def available_rooms
     object.rooms.where(status: :available).count
+  end
+
+  def hotel_facilities
+    object.facilities.map {|f| {id: f.id, name: f.name }}
   end
   
 end
