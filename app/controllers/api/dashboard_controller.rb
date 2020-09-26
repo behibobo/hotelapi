@@ -22,15 +22,15 @@ class Api::DashboardController < ApplicationController
 			hotels.each do |hotel|
 				if hotel.rooms.where(room_type: :single).any?
 
-					rooms.first.count += hotel.rooms.where(room_type: :single).first.count
+					rooms.first[:count] += hotel.rooms.where(room_type: :single).first.count
 				end
 
 				if hotel.rooms.where(room_type: :double).any?
-					rooms.second.count += hotel.rooms.where(room_type: :double).first.count
+					rooms.second[:count] += hotel.rooms.where(room_type: :double).first.count
 				end
 
 				if hotel.rooms.where(room_type: :suite).any?
-					rooms.last.count += hotel.rooms.where(room_type: :suite).first.count
+					rooms.last[:count] += hotel.rooms.where(room_type: :suite).first.count
 				end
 			end
 			data = {
