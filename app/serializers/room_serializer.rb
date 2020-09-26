@@ -1,5 +1,5 @@
 class RoomSerializer < ActiveModel::Serializer
-  attributes :id, :room_type, :count :images
+  attributes :id, :room_type, :count, :images
   has_one :hotel
 
   def images
