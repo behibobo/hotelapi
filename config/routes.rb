@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     get '/all_facilities', to: "facilities#all"
     get '/dashboard', to: "dashboard#index"
     get '/hotels/:id/images', to: "hotels#images"
+    get '/rooms/:id/images', to: "rooms#images"
   end
   
 end
