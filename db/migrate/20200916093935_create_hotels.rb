@@ -7,7 +7,7 @@ class CreateHotels < ActiveRecord::Migration[5.2]
       t.string :lat
       t.string :lng
       t.integer :rank
-
+      t.integer :category
       t.timestamps
     end
   end

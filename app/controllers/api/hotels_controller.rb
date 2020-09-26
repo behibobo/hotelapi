@@ -74,6 +74,6 @@ class Api::HotelsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def hotel_params
-      params.require(:hotel).permit(:name, :address, :city_id, :user_id, :lat, :lng, :rank)
+      params.require(:hotel).permit(:name, :address, :category,  :city_id, :user_id, :lat, :lng, :rank)
     end
 end

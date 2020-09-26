@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2020_09_23_165109) do
     t.string "lat"
     t.string "lng"
     t.integer "rank"
+    t.integer "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -80,8 +81,7 @@ ActiveRecord::Schema.define(version: 2020_09_23_165109) do
   create_table "rooms", force: :cascade do |t|
     t.bigint "hotel_id"
     t.integer "room_type"
-    t.string "room_no"
-    t.integer "status"
+    t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["hotel_id"], name: "index_rooms_on_hotel_id"

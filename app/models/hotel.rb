@@ -8,6 +8,8 @@ class Hotel < ApplicationRecord
   has_many :facilities, through: :hotel_facilities
   has_many :rooms
   
+  enum category: [ :inn, :hotel_apt, :hotel, :hostel ]
+
   def current_contract
     self.contracts.order(created_at: :desc).first
   end
