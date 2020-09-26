@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     delete "/upload/:id", to: "upload#delete"
     get '/all_facilities', to: "facilities#all"
     get '/dashboard', to: "dashboard#index"
+    get '/hotels/:id/images', to: "hotels#images"
   end
   
 end

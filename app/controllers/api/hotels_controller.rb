@@ -66,6 +66,11 @@ class Api::HotelsController < ApplicationController
     @hotel.destroy
   end
 
+  def images
+    images = Image.where(imageable_type: "Hotel", imageable_id: params[:id])
+    render json: images
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_hotel
@@ -74,6 +79,6 @@ class Api::HotelsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def hotel_params
-      params.require(:hotel).permit(:name, :address, :category,  :city_id, :user_id, :lat, :lng, :rank)
+      params.require(:hotel).permit(:name, :address, :category, :city_id, :user_id, :lat, :lng, :rank)
     end
 end

@@ -8,6 +8,10 @@ class HotelSerializer < ActiveModel::Serializer
     object.images.map { |image| {id: image.id, url: image.name.url} }
   end
 
+  def category
+    Hotel.categories[object.category]  
+  end
+
   def facilities
     object.facilities.pluck(:id)
   end
