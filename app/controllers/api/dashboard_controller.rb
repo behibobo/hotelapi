@@ -2,24 +2,35 @@ class Api::DashboardController < ApplicationController
 
 	def index
 			hotels = Hotel.all
-			rooms = {
-				single: 0,
-				double: 0,
-				suite: 0
-			}
+			rooms = [
+				{
+					type: "single",
+					count: 0
+				},
+				{
+					type: "double",
+					count: 0
+				},
+				{
+					type: "suite",
+					count: 0
+				}
+
+			]
 			
 
 			hotels.each do |hotel|
 				if hotel.rooms.where(room_type: :single).any?
-					rooms[:single] = hotel.rooms.where(room_type: :single).first.count
+
+					rooms.first.count = hotel.rooms.where(room_type: :single).first.count
 				end
 
 				if hotel.rooms.where(room_type: :double).any?
-					rooms[:double] = hotel.rooms.where(room_type: :double).first.count
+					rooms.second.count = hotel.rooms.where(room_type: :double).first.count
 				end
 
 				if hotel.rooms.where(room_type: :suite).any?
-					rooms[:suite] = hotel.rooms.where(room_type: :suite).first.count
+					rooms.last.count = hotel.rooms.where(room_type: :suite).first.count
 				end
 			end
 			data = {
