@@ -3,6 +3,7 @@ class HotelSerializer < ActiveModel::Serializer
   
   has_one :city
   has_one :user
+  has_one :room_type
   
   def images
     object.images.map { |image| {id: image.id, url: image.name.url} }
