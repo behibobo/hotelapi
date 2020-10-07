@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :contracts
     resources :hotels
+    resources :room_types
     resources :facilities
     resources :rooms
     resources :users, only: [:index, :create]

@@ -1,6 +1,5 @@
 class Room < ApplicationRecord
   belongs_to :hotel
+  belongs_to :room_type
   has_many :images, as: :imageable
-
-  enum room_type: [ :single, :double, :suite ]
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_23_165109) do
+ActiveRecord::Schema.define(version: 2020_10_06_134413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2020_09_23_165109) do
 
   create_table "facilities", force: :cascade do |t|
     t.string "name"
+    t.integer "facility_type", limit: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(version: 2020_09_23_165109) do
   create_table "hotels", force: :cascade do |t|
     t.string "name"
     t.string "address"
+    t.text "details"
     t.bigint "city_id"
     t.string "lat"
     t.string "lng"
@@ -78,25 +80,27 @@ ActiveRecord::Schema.define(version: 2020_09_23_165109) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "rooms", force: :cascade do |t|
-    t.bigint "hotel_id"
-    t.integer "room_type"
-    t.integer "count"
+  create_table "room_types", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["hotel_id"], name: "index_rooms_on_hotel_id"
   end
 
-  create_table "uploads", force: :cascade do |t|
-    t.string "image"
+  create_table "rooms", force: :cascade do |t|
+    t.bigint "hotel_id"
+    t.string "number"
+    t.string "check_in_hour"
+    t.string "check_out_hour"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "room_type_id"
+    t.index ["hotel_id"], name: "index_rooms_on_hotel_id"
+    t.index ["room_type_id"], name: "index_rooms_on_room_type_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.integer "age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role"
@@ -109,4 +113,5 @@ ActiveRecord::Schema.define(version: 2020_09_23_165109) do
   add_foreign_key "hotels", "cities"
   add_foreign_key "hotels", "users"
   add_foreign_key "rooms", "hotels"
+  add_foreign_key "rooms", "room_types"
 end
