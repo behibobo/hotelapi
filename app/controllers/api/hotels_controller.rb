@@ -5,6 +5,9 @@ class Api::HotelsController < ApplicationController
   def index
     if current_user.role == "admin"
       @hotels = Hotel.all
+      @hotels = @hotels.where(category: params[:category]) if params[:category]
+      @hotels = @hotels.where(city_id: params[:city_id]) if params[:city_id]
+      @hotels = @hotels.where(rank: params[:rank]) if params[:rank]
       paginate @hotels, per_page: (params[:per_page]) ? params[:per_page] : 15
     else
       @hotel = Hotel.where(user: current_user).first
