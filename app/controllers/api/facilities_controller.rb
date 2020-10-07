@@ -40,8 +40,6 @@ class Api::FacilitiesController < ApplicationController
 
   def all
     @facilities = Facility.all
-    @facilities = @facilities.starts_with('name', params[:name]) if params[:name]
-
     render json: @facilities
   end
 
@@ -53,6 +51,6 @@ class Api::FacilitiesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def facility_params
-      params.require(:facility).permit(:name)
+      params.require(:facility).permit(:name, :facility_type)
     end
 end
