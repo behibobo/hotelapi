@@ -4,6 +4,7 @@ class Hotel < ApplicationRecord
   belongs_to :user, optional: true
   has_many :images, as: :imageable
   has_many :contracts
+  has_many :vicinities
 
   has_many :hotel_facilities
   has_many :facilities, through: :hotel_facilities

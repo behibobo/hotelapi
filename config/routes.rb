@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
+  
   namespace :api do
     resources :contracts
     resources :hotels
     resources :room_types
     resources :facilities
     resources :rooms
+    resources :vicinities
+    resources :bookings
+    resources :passengers
     resources :users, only: [:index, :create]
+    
     post "/login", to: "users#login"
     get "/auto_login", to: "users#auto_login"
     get "/province", to: "cities#province"
@@ -17,5 +22,4 @@ Rails.application.routes.draw do
     get '/hotels/:id/images', to: "hotels#images"
     get '/rooms/:id/images', to: "rooms#images"
   end
-  
 end

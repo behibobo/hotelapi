@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  room: one
+  passenger: one
+  check_in_date: 2020-10-08
+  check_out_date: 2020-10-08
+  book_date: 2020-10-08
+  status: 1
+
+two:
+  room: two
+  passenger: two
+  check_in_date: 2020-10-08
+  check_out_date: 2020-10-08
+  book_date: 2020-10-08
+  status: 1

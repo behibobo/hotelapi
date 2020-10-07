@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_06_134413) do
+ActiveRecord::Schema.define(version: 2020_10_07_233258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "room_id"
+    t.bigint "passenger_id"
+    t.date "check_in_date"
+    t.date "check_out_date"
+    t.date "book_date"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["passenger_id"], name: "index_bookings_on_passenger_id"
+    t.index ["room_id"], name: "index_bookings_on_room_id"
+  end
 
   create_table "cities", force: :cascade do |t|
     t.bigint "province_id"
@@ -74,10 +87,31 @@ ActiveRecord::Schema.define(version: 2020_10_06_134413) do
     t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
   end
 
+  create_table "passengers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "password_digest"
+    t.string "phone"
+    t.string "nid"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "provinces", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "room_facilities", force: :cascade do |t|
+    t.bigint "room_id"
+    t.bigint "facility_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["facility_id"], name: "index_room_facilities_on_facility_id"
+    t.index ["room_id"], name: "index_room_facilities_on_room_id"
   end
 
   create_table "room_types", force: :cascade do |t|
@@ -106,12 +140,25 @@ ActiveRecord::Schema.define(version: 2020_10_06_134413) do
     t.integer "role"
   end
 
+  create_table "vicinities", force: :cascade do |t|
+    t.string "name"
+    t.bigint "hotel_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hotel_id"], name: "index_vicinities_on_hotel_id"
+  end
+
+  add_foreign_key "bookings", "passengers"
+  add_foreign_key "bookings", "rooms"
   add_foreign_key "cities", "provinces"
   add_foreign_key "contracts", "hotels"
   add_foreign_key "hotel_facilities", "facilities"
   add_foreign_key "hotel_facilities", "hotels"
   add_foreign_key "hotels", "cities"
   add_foreign_key "hotels", "users"
+  add_foreign_key "room_facilities", "facilities"
+  add_foreign_key "room_facilities", "rooms"
   add_foreign_key "rooms", "hotels"
   add_foreign_key "rooms", "room_types"
+  add_foreign_key "vicinities", "hotels"
 end
