@@ -8,11 +8,11 @@ class Api::BookingsController < ApplicationController
       @bookings = Booking.all
 
     else
-      hotel = Hotel.where(user: params[:current_user])
+      hotel = Hotel.where(user: current_user)
       rooms_id = hotel.rooms.pluck(:id).flatten
       @bookings = Booking.where(room_id: rooms_id)    
     end
-    
+
     @bookings = @bookings.where(room_id: params[:room_id]) if params[:room_id]
 
     if params[:hotel_id]
