@@ -6,8 +6,8 @@ class Api::HotelsController < ApplicationController
     if current_user.role == "admin"
       @hotels = Hotel.all
       @hotels = @hotels.where(category: params[:category]) if params[:category]
-      if params[:state_id]
-        city_ids = City.where(state_id: params[:state_id]).pluck(:id).flatten
+      if params[:province_id]
+        city_ids = City.where(province_id: params[:province_id]).pluck(:id).flatten
         @hotels = @hotels.where(city_id: city_ids)
 
       end
