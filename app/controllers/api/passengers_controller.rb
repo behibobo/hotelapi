@@ -4,8 +4,7 @@ class Api::PassengersController < ApplicationController
   # GET /passengers
   def index
     @passengers = Passenger.all
-
-    render json: @passengers
+    paginate @passengers, per_page: (params[:per_page]) ? params[:per_page] : 15
   end
 
   # GET /passengers/1
