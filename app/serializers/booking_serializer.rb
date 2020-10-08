@@ -1,5 +1,5 @@
 class BookingSerializer < ActiveModel::Serializer
-  attributes :id, :check_in_date, :check_out_date, :book_date, :status, :room_type
+  attributes :id, :check_in_date, :check_out_date, :book_date, :status, :room_type, :book_hour
   has_one :room
   has_one :passenger
 
@@ -21,6 +21,10 @@ class BookingSerializer < ActiveModel::Serializer
 
   def book_shamsi
     object.book_date.to_date.to_pdate.to_s
+  end
+
+  def book_hour
+    object.book_date.strftime("%H:%M:%S")
   end
 
 end
