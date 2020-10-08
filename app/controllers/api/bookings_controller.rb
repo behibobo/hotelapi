@@ -3,7 +3,16 @@ class Api::BookingsController < ApplicationController
 
   # GET /bookings
   def index
-    @bookings = Booking.all
+
+    if current_user.role == "admin"
+      @bookings = Booking.all
+
+    else
+      hotel = Hotel.where(user: params[:current_user])
+      rooms_id = hotel.rooms.pluck(:id).flatten
+      @bookings = Booking.where(room_id: rooms_id)    
+    end
+    
     @bookings = @bookings.where(room_id: params[:room_id]) if params[:room_id]
 
     if params[:hotel_id]
