@@ -3,7 +3,7 @@ class Api::VicinitiesController < ApplicationController
 
   # GET /vicinities
   def index
-    @vicinities = Vicinity.all
+    @vicinities = Vicinity.where(hotel_id: params[:hotel_id])
 
     render json: @vicinities
   end
