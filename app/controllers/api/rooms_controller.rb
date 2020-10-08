@@ -18,6 +18,12 @@ class Api::RoomsController < ApplicationController
     @room = Room.new(room_params)
 
     if @room.save
+      if params[:facilities]
+        params[:facilities].each do |facility|
+          RoomFacility.create!(room: @room, facility_id: facility)
+        end
+      end
+
       render json: @room, status: :created
     else
       render json: @room.errors, status: :unprocessable_entity
@@ -27,6 +33,15 @@ class Api::RoomsController < ApplicationController
   # PATCH/PUT /rooms/1
   def update
     if @room.update(room_params)
+
+      @room.room_facilities.destroy_all()
+
+      if params[:facilities]
+        params[:facilities].each do |facility|
+          RoomFacility.create!(room: @room, facility_id: facility)
+        end
+      end
+
       render json: @room
     else
       render json: @room.errors, status: :unprocessable_entity
