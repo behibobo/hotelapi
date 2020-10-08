@@ -10,8 +10,7 @@ class Api::BookingsController < ApplicationController
       room_ids = Room.where(hotel_id: params[:hotel_id]).pluck(:id).flatten
       @bookings = @bookings.where(room_id: room_ids)
     end
-    
-    render json: @bookings
+    paginate @bookings, per_page: (params[:per_page]) ? params[:per_page] : 15
   end
 
   # GET /bookings/1

@@ -4,6 +4,7 @@ class Hotel < ApplicationRecord
   has_many :images, as: :imageable
   has_many :contracts, dependent: :destroy
   has_many :vicinities, dependent: :destroy
+  has_many :contacts, dependent: :destroy
 
   has_many :hotel_facilities, dependent: :destroy
   has_many :facilities, through: :hotel_facilities
