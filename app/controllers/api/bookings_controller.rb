@@ -5,6 +5,12 @@ class Api::BookingsController < ApplicationController
   def index
     @bookings = Booking.all
     @bookings = @bookings.where(room_id: params[:room_id]) if params[:room_id]
+
+    if params[:hotel_id]
+      room_ids = Room.where(hotel_id: params[:hotel_id]).pluck(:id).flatten
+      @bookings = @bookings.where(room_id: room_ids)
+    end
+    
     render json: @bookings
   end
 
