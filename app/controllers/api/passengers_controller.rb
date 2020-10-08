@@ -3,8 +3,14 @@ class Api::PassengersController < ApplicationController
 
   # GET /passengers
   def index
-    @passengers = Passenger.all
-    
+    if current_user.role == "admin"
+      @passengers = Passenger.all
+    else
+      hotel = Hotel.where(user: current_user).first
+      rooms_id = hotel.rooms.pluck(:id).flatten
+      passenger_ids = Booking.where(room_id: rooms_id).pluck(passenger_id).flatten
+      @passengers = Passenger.where(id: passenger_ids)
+    end
     paginate @passengers, per_page: (params[:per_page]) ? params[:per_page] : 15
   end
 
