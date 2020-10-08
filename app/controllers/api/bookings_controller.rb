@@ -4,7 +4,7 @@ class Api::BookingsController < ApplicationController
   # GET /bookings
   def index
     @bookings = Booking.all
-
+    @bookings = @bookings.where(room_id: params[:room_id]) if params[:room_id]
     render json: @bookings
   end
 
