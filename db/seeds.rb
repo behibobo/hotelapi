@@ -47,6 +47,7 @@ User.create(username: "admin", password: "password", role: "admin")
         email: Faker::Internet.email,
         password: "password",
         phone: Faker::PhoneNumber.cell_phone,
+        nid: "1234566";
     )
 end
 40.times do 
@@ -60,6 +61,7 @@ end
         address: Faker::Address.street_address,
         details: Faker::Lorem.sentences,
         user: user,
+        category: [0,1,2,3].sample,
         rank: [1,2,3,4,5].sample,
         city: City.all.sample,
         lat:Faker::Address.latitude,
