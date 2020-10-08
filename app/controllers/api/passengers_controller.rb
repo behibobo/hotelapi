@@ -8,7 +8,7 @@ class Api::PassengersController < ApplicationController
     else
       hotel = Hotel.where(user: current_user).first
       rooms_id = hotel.rooms.pluck(:id).flatten
-      passenger_ids = Booking.where(room_id: rooms_id).pluck(passenger_id).flatten
+      passenger_ids = Booking.where(room_id: rooms_id).pluck(:passenger_id).flatten
       @passengers = Passenger.where(id: passenger_ids)
     end
     paginate @passengers, per_page: (params[:per_page]) ? params[:per_page] : 15
