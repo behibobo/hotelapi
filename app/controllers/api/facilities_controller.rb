@@ -4,7 +4,7 @@ class Api::FacilitiesController < ApplicationController
   # GET /facilities
   def index
     @facilities = Facility.all
-    @facilities = @facilities.where(facility_type: params[:facility_type]) if params[facility_type]
+    @facilities = @facilities.where(facility_type: params[:facility_type]) if params[:facility_type]
     paginate @facilities, per_page: (params[:per_page]) ? params[:per_page] : 15
   end
 
