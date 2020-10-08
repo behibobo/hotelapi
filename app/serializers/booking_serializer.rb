@@ -8,7 +8,7 @@ class BookingSerializer < ActiveModel::Serializer
   end
 
   def hotel
-    ActiveModelSerializers::SerializableResource.new(object.room.hotel)
+    object.room.hotel
   end
 
   def status
