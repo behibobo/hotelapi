@@ -68,7 +68,7 @@ end
 
 
     [101,102,103,201,202].shuffle.each do |n|
-        room = Room.create(room_type: RoomType.all.sample, number: n.to_s, check_in_hour: "12:00", check_out_hour: "11:00")
+        room = Room.create!(hotel: hotel, room_type: RoomType.all.sample, number: n.to_s, check_in_hour: "12:00", check_out_hour: "11:00")
     end
 
     Booking.create!(
