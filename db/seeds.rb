@@ -28,8 +28,8 @@ unless City.count > 0
     end
 end
 #RoomType.destroy_all
-Passenger.destroy_all
 Booking.destroy_all
+Passenger.destroy_all
 Room.destroy_all
 Hotel.destroy_all
 User.destroy_all
