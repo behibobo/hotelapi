@@ -2,8 +2,8 @@ class Hotel < ApplicationRecord
   belongs_to :city
   belongs_to :user, optional: true
   has_many :images, as: :imageable
-  has_many :contracts
-  has_many :vicinities
+  has_many :contracts, dependent: :destroy
+  has_many :vicinities, dependent: :destroy
 
   has_many :hotel_facilities, dependent: :destroy
   has_many :facilities, through: :hotel_facilities
