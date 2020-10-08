@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :contacts
   namespace :api do
     resources :contracts
     resources :hotels
