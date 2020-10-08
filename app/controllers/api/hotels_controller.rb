@@ -6,7 +6,11 @@ class Api::HotelsController < ApplicationController
     if current_user.role == "admin"
       @hotels = Hotel.all
       @hotels = @hotels.where(category: params[:category]) if params[:category]
-      @hotels = @hotels.where(city_id: params[:city_id]) if params[:city_id]
+      if params[:state_id]
+        city_ids = City.where(state_id: params[:state_id]).pluck(:id).flatten
+        @hotels = @hotels.where(city_id: city_ids)
+
+      end
       @hotels = @hotels.where(rank: params[:rank]) if params[:rank]
       paginate @hotels, per_page: (params[:per_page]) ? params[:per_page] : 15
     else
