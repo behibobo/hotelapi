@@ -27,7 +27,7 @@ unless City.count > 0
         )
     end
 end
-RoomType.destroy_all
+#RoomType.destroy_all
 Passenger.destroy_all
 Booking.destroy_all
 Room.destroy_all
@@ -35,9 +35,9 @@ Hotel.destroy_all
 User.destroy_all
 
 
-RoomType.create(name: "single")
-RoomType.create(name: "double")
-RoomType.create(name: "suit")
+#RoomType.create(name: "single")
+#RoomType.create(name: "double")
+#RoomType.create(name: "suit")
 
 User.create(username: "admin", password: "password", role: "admin")
 20.times do
