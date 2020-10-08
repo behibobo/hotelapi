@@ -1,6 +1,5 @@
 class Hotel < ApplicationRecord
   belongs_to :city
-  belongs_to :room_type
   belongs_to :user, optional: true
   has_many :images, as: :imageable
   has_many :contracts
