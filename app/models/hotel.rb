@@ -5,7 +5,7 @@ class Hotel < ApplicationRecord
   has_many :contracts
   has_many :vicinities
 
-  has_many :hotel_facilities
+  has_many :hotel_facilities, dependent: :destroy
   has_many :facilities, through: :hotel_facilities
   has_many :rooms
   
