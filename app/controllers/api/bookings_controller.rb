@@ -10,6 +10,15 @@ class Api::BookingsController < ApplicationController
       room_ids = Room.where(hotel_id: params[:hotel_id]).pluck(:id).flatten
       @bookings = @bookings.where(room_id: room_ids)
     end
+
+    if params[:from_date]
+      @bookings = @bookings.where('check_in_date >= ?', params[:from_date])
+    end
+
+    if params[:to_date]
+      @bookings = @bookings.where('check_out_date >= ?', params[:to_date])
+    end
+
     paginate @bookings, per_page: (params[:per_page]) ? params[:per_page] : 15
   end
 
