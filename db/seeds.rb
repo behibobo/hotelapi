@@ -71,8 +71,17 @@ end
         room = Room.create(room_type: RoomType.all.sample, number: n.to_s, check_in_hour: "12:00", check_out_hour: "11:00")
     end
 
-    Booking.create(
+    Booking.create!(
         room: hotel.rooms.first, 
+        check_in_date: Faker::Date.between(from: Date.today  + 2.days, to: Date.today + 10.days),
+        check_out_date: Faker::Date.between(from: Date.today  + 4.days, to: Date.today + 15.days), 
+        book_date: Faker::Date.between(from: Date.today, to: Date.today + 3.days), 
+        passenger: Passenger.all.sample,
+        status: [0,1,2].sample
+    )
+
+    Booking.create!(
+        room: hotel.rooms.last, 
         check_in_date: Faker::Date.between(from: Date.today  + 2.days, to: Date.today + 10.days),
         check_out_date: Faker::Date.between(from: Date.today  + 4.days, to: Date.today + 15.days), 
         book_date: Faker::Date.between(from: Date.today, to: Date.today + 3.days), 
