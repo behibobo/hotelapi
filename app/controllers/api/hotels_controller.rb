@@ -9,8 +9,9 @@ class Api::HotelsController < ApplicationController
       if params[:province_id]
         city_ids = City.where(province_id: params[:province_id]).pluck(:id).flatten
         @hotels = @hotels.where(city_id: city_ids)
-
       end
+
+      @hotels = @hotels.starts_with(name, params[:name]) if params[:name]
       @hotels = @hotels.where(rank: params[:rank]) if params[:rank]
       paginate @hotels, per_page: (params[:per_page]) ? params[:per_page] : 15
     else

@@ -19,4 +19,6 @@ class Hotel < ApplicationRecord
     contracts.any? && current_contract.to_date > Date.today
   end
 
+  
+
 end
