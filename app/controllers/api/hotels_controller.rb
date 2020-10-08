@@ -66,6 +66,9 @@ class Api::HotelsController < ApplicationController
 
   # DELETE /hotels/1
   def destroy
+    if @hotel.rooms.any?
+      render json: "has rooms", status: :unprocessable_entity
+    end
     @hotel.destroy
   end
 
