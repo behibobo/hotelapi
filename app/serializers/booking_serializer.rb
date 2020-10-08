@@ -1,10 +1,14 @@
 class BookingSerializer < ActiveModel::Serializer
-  attributes :id, :check_in_date, :check_out_date, :book_date, :status, :room_type, :book_hour
+  attributes :id, :check_in_date, :check_out_date, :book_date, :status, :room_type, :book_hour, :hotel
   has_one :room
   has_one :passenger
 
   def room_type
     object.room.room_type
+  end
+
+  def hotel
+    object.room.hotel
   end
 
   def status
