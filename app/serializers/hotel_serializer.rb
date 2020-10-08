@@ -3,7 +3,6 @@ class HotelSerializer < ActiveModel::Serializer
   
   has_one :city
   has_one :user
-  has_one :room_type
   has_many :vicinities
   
   def images
