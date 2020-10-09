@@ -6,9 +6,14 @@ class Api::HotelsController < ApplicationController
     if current_user.role == "admin"
       @hotels = Hotel.all
       @hotels = @hotels.where(category: params[:category]) if params[:category]
+      
       if params[:province_id]
         city_ids = City.where(province_id: params[:province_id]).pluck(:id).flatten
         @hotels = @hotels.where(city_id: city_ids)
+      end
+
+      if params[:city_id]
+        @hotels = @hotels.where(city_id: city_id)
       end
 
       @hotels = @hotels.starts_with(:name, params[:name]) if params[:name]
