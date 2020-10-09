@@ -13,6 +13,6 @@ class RoomSerializer < ActiveModel::Serializer
   end
 
   def room_facilities
-    object.facilities.map {|f| {id: f.id, name: f.name }}
+    object.facilities.map {|f| {id: f.id, name: f.name, type: Facility.facility_types[f.facility_type] }}
   end
 end
