@@ -3,7 +3,6 @@ class Api::BookingsController < ApplicationController
 
   # GET /bookings
   def index
-
     if current_user.role == "admin"
       @bookings = Booking.all
 
@@ -13,19 +12,17 @@ class Api::BookingsController < ApplicationController
       @bookings = Booking.where(room_id: rooms_id)    
     end
 
-    @bookings = @bookings.where(room_id: params[:room_id]) if params[:room_id]
-
     if params[:province_id]
       city_ids = City.where(province_id: params[:province_id]).pluck(:id)
       hotels = Hotel.where(city_id: city_ids)
-      rooms_id = hotels.map {|h| h.rooms.pluck(:id)}.flatten
-      @bookings = Booking.where(room_id: rooms_id)
+      room_ids = hotels.map {|h| h.rooms.pluck(:id)}.flatten
+      @bookings = @bookings.where(room_id: room_ids)
     end
 
     if params[:city_id]
       hotels = Hotel.where(city_id: params[:city_id])
-      rooms_id = hotels.map {|h| h.rooms.map {|r| r.id }.flatten}.flatten
-      @bookings = Booking.where(room_id: rooms_id)
+      room_ids = hotels.map {|h| h.rooms.pluck(:id)}.flatten
+      @bookings = @bookings.where(room_id: room_ids)
     end
 
     if params[:hotel_id]
@@ -40,6 +37,8 @@ class Api::BookingsController < ApplicationController
     if params[:to_date]
       @bookings = @bookings.where('check_out_date >= ?', params[:to_date])
     end
+    
+    @bookings = @bookings.where(room_id: params[:room_id]) if params[:room_id]
 
     paginate @bookings, per_page: (params[:per_page]) ? params[:per_page] : 15
   end
