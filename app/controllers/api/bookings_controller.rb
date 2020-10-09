@@ -16,9 +16,9 @@ class Api::BookingsController < ApplicationController
     @bookings = @bookings.where(room_id: params[:room_id]) if params[:room_id]
 
     if params[:province_id]
-      city_ids = City.where(province_id: params[:province_id]).map {|c| c.id }.flatten
+      city_ids = City.where(province_id: params[:province_id]).pluck(:id)
       hotels = Hotel.where(city_id: city_ids)
-      rooms_id = hotels.map {|h| h.rooms.map {|r| r.id }.flatten}.flatten
+      rooms_id = hotels.map {|h| h.rooms.pluck(:id)}.flatten
       @bookings = Booking.where(room_id: rooms_id)
     end
 
