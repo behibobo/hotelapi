@@ -15,6 +15,19 @@ class Api::BookingsController < ApplicationController
 
     @bookings = @bookings.where(room_id: params[:room_id]) if params[:room_id]
 
+    if params[:province_id]
+      city_ids = City.where(province_id: params[:province_id]).pluck(:id).flatten
+      hotels = Hotel.where(city_id: city_ids)
+      rooms_id = hotel.rooms.pluck(:id).flatten
+      @bookings = Booking.where(room_id: rooms_id)
+    end
+
+    if params[:city_id]
+      hotels = Hotel.where(city_id: params[:city_id])
+      rooms_id = hotel.rooms.pluck(:id).flatten
+      @bookings = Booking.where(room_id: rooms_id)
+    end
+
     if params[:hotel_id]
       room_ids = Room.where(hotel_id: params[:hotel_id]).pluck(:id).flatten
       @bookings = @bookings.where(room_id: room_ids)
