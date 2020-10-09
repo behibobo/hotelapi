@@ -13,7 +13,7 @@ class Api::HotelsController < ApplicationController
       end
 
       if params[:city_id]
-        @hotels = @hotels.where(city_id: city_id)
+        @hotels = @hotels.where(city_id: params[:city_id])
       end
 
       @hotels = @hotels.starts_with(:name, params[:name]) if params[:name]
